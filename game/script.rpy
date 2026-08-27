@@ -4,12 +4,12 @@
 # name of the character.
 
 define player = Character(_("我"), color = "79575d")
-define jth = Character(_("金泰亨·"), color = "79575d")
-define yq = Character(_("Esthrr"), color = "79575d")
-define rs = Character(_("入水"), color = "79575d")
-define cy = Character(_("草原"), color = "79575d")
-define xxw = Character(_("行星威"), color = "79575d")
-define lf = Character(_("岚风"), color = "79575d")
+define jth = Character(_("金泰亨·（吟游诗人）"), color = "79575d")
+define yq = Character(_("Esthrr（贤者）"), color = "79575d")
+define rs = Character(_("入水（武士）"), color = "79575d")
+define cy = Character(_("草原（骑士）"), color = "79575d")
+define xxw = Character(_("行星威（武士）"), color = "79575d")
+define lf = Character(_("岚风（蝰蛇剑士）"), color = "79575d")
 define sx = Character(_("邪恶四小"), color = "79575d")
 
 # 正常状态（全彩）
@@ -191,7 +191,7 @@ label diyibo:
     "每当有敌人出现在可及的距离，你便迫不及待地摁下螺旋气流的技能，只是读条还没完便丢失了目标，让你逐渐暴躁。"
     show npc at center
     player "!!!"
-    "眼见一个蝰蛇战士前来炒股，蹲在了你攻击范围内的洞口。"
+    "眼见一个蝰蛇剑士前来炒股，蹲在了你攻击范围内的洞口。"
     player "好机会！"
     "蛇鳞术期间攻击他显然是犯了大忌，不过你只是一个莫古仔，待会蝰蛇吸满汤汁砍死一片你也可以推脱说队友也干了。"
 
@@ -231,7 +231,7 @@ label yq_save1:
     
     show yq sweat
     yq "还好手速快……诶！还烫死几个。"
-    "你不认识贤者的lb，只是你被原地控死没有乱跑才得意存活，你也大概get到这个技能能让你不受伤害。"
+    "你不认识贤者的LB，只是你被原地控死没有乱跑才得意存活，你也大概get到这个技能能让你不受伤害。"
 
     player "啊……谢谢你救了我。"
     show yq smile
@@ -247,11 +247,31 @@ label caoyuan_save1:
     "此刻，身上赫然出现了一条白色的细线，另一端连着的正是同队的骑士"
     play sound "audio/skills/lb.mp3"
 
-    show 
-    
+    show cy normal
+    cy "保护你了，别担心。"
+    show cy normal at dim_sprite
+    "敌方倾倒而来的伤害全部通过连接传到了骑士身上，无法对开着无敌的他造成分毫的擦伤"
+    player "谢谢骑士！"
+    show cy smile at normal_sprite
+    "兔男回敬了一个微笑"
+    hide cy 
+
+    jump continue1
 
 label continue1:
-    player "……呃啊"
+    play sound "audio/skills/longpao.mp3"
+    
+    "救下一条命的技能结束了他的使命，对面的龙骑却气急败坏地对你继续丢着小技能。"
+    player "……呃啊！"
+
+    show jth normal 
+    show skills guangyinshen
+    jth "给你净化了，快往回走。"
+    hide skills guangyinshen
+
+    player "……谢谢……"
+    "身上被施加光阴神祝福的你急忙挂上疾跑往回撤，总算让吃烂头的龙骑心有不甘地走开了。"
+
 
     # "猫魅族女性诗人"
     # "敖龙族女性贤者"

@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("糟糕！我被散人包围了")
+define config.name = _("完蛋！我被散人包围了")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
