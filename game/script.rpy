@@ -11,6 +11,9 @@ define cy = Character(_("草原（骑士）"), color = "79575d")
 define xxw = Character(_("行星威（武士）"), color = "79575d")
 define lf = Character(_("岚风（蝰蛇剑士）"), color = "79575d")
 define sx = Character(_("邪恶四小"), color = "79575d")
+define ncg = Character(_("耐草哥(武僧)"), color = "79575d")
+
+
 
 # 正常状态（全彩）
 transform normal_sprite:
@@ -177,7 +180,7 @@ label duiyou:
     jump diyibo
 
 label diyibo:
-    scene bg dongkou
+    scene bg cfmy_dongkou
     with dissolve
     play music "audio/cfmy_fight.mp3" fadein 1.0
     
@@ -270,12 +273,224 @@ label continue1:
     hide skills guangyinshen
 
     player "……谢谢……"
+    hide jth
     "身上被施加光阴神祝福的你急忙挂上疾跑往回撤，总算让吃烂头的龙骑心有不甘地走开了。"
 
+    jump dierbo
 
-    # "猫魅族女性诗人"
-    # "敖龙族女性贤者"
-    # "维埃拉族男性骑士"
+label dierbo:
+    scene bg cfmy_a2
+
+    "……"
+    "刚刚的风波平息后不久，新一波点位已经刷新。你深知自己最大的贡献应该是摸点，于是朝着A2的方向走去。"
+    player "死腿快跑，我要刷尘秘守护者。"
+
+    "其他队友果然还是晚你一步，你率先到达点位，蹲下摸了起来。"
+
+    show xxw normal
+    play sound "audio/skills/panzi.mp3"
+
+    player "什么东西断我点！"
+    show xxw smile
+    player "讨厌的盘子……"
+    "来者是敌方的武士，对方并没有理会你的吐槽，可一旦你蹲下摸点，她便拿太刀戳你两下。你一下子被搞炸毛了。"
+    player "阿西吧，我和你拼了——！"
+    with vpunch
+
+    show xxw normal at dim_sprite
+    play sound "audio/skills/zhaohuan.mp3"
+    play sound "audio/skills/huixie.mp3"
+
+    "吐了半天口水，武士一口热水就回了上来。你甚至有点想把巴哈丢出来了，可是你只是一个莫古仔，舍不得你宝贵的LB。"
+    
+    menu choice_modian:
+        player "再这样下去不是办法……到底要不要摸这个点？"
+        
+        "就算是为了尊严，一定要把A2拿下！":
+            jump die_1
+
+        "还是别继续纠缠了。":
+            jump continue2
+
+label die_1:
+    player "臭盘子，我队友马上来了，到时候你想走都走不了！"
+    "你卯足了劲，在点位上放下了巴哈，企图赶走面前的敌方野王。为了加大剂量，你补充了一发幻影弹。"
+    show xxw smile at normal_sprite
+    play sound "audio/skills/ditian.mp3"
+    "盘子露出了诡异的笑容。"
+    play sound "audio/skills/lb.mp3"
+    show xxw smile at dim_sprite
+    with hpunch
+    # 1. 隐藏常规对话框
+    window hide
+
+    # 2. 渐变切换到全黑背景
+    scene expression "#000000" with dissolve
+
+    # 3. 开启文本窗口，输出结局描述文字
+    window show
+    
+    "这次没有队友的帮助，你在刀光间成为了可怜的4战意。"
+    "【BAD END：侍好吃吗】"
+
+    # 4. 文字播完后稍作停留，然后退出
+    pause 2.0
+    $ renpy.quit()
+
+
+label continue2:
+
+    show xxw normal at normal_sprite
+    player "算了算了，你赢了，我不摸这个点了。"
+    hide xxw
+
+    scene bg cfmy_d1_1
+
+    "此时队友正待在D1这个不妙的位置，你前去与他们汇合，然而敌方的大团也已经到达了A2。莫古仔队友看到人就扔下点准备跑路。"
+
+    "聪明的队友竟然选择从D1的窄口离开，不会走路的你坚定跟着大部队走就是对的，也凑了上去。"
+
+    play sound "audio/skills/qianchongbu.mp3"
+
+    player "完了。"
+
+    show npc at center
+    sx "这群 * * 蘑菇仔路都不会走，看我一个飞天大夹击全给你吃了！"
+    show npc:
+        left
+        dim_sprite
+
+    show ncg normal at right
+    
+    play sound "audio/skills/lb.mp3"
+    
+    show npc:
+        left
+        normal_sprite
+    sx "骑士被踹了……！没保上……"
+
+    "四小显然没料到屁股后面会突然冒出来一个武僧，舞者已经前冲步进场，没有保护的脆皮被队友恐惧的乱火送回了家。"
+    hide npc
+    hide ncg
+
+    show ncg normal at center
+    player "好拆！"
+    show ncg smile at center
+    ncg "（ ac 伸了伸拳头想要对碰一下）"
+
+    show npc at center
+    "舞者和骑士双双失利，只剩已经跳斩入场的 dk 与上天的龙骑二人，你撑开蓝盾。"
+
+    show rs angry at center
+    rs "四小……"
+    play sound "audio/skills/ditian.mp3"
+    rs "你们刚刚，有在打老三吧。"
+    
+    show npc at center
+    with vpunch
+    "4秒结束，龙骑落在了同样来不及停手的dk留下的腐秽大地中，而二人身上都出现了令人心惊肉跳的蓝紫色buff。"
+    show rs angry at center
+    play sound "audio/skills/lb.mp3"
+    pause 1.0
+    
+    show npc at center
+    sx "有斩钅……"
+    "薄盾抵不住队友不断骚扰的小火，血条赤裸地展现出来，又在刹那间归了零。"
+    hide npc
+
+    show rs smile at center
+    rs "安心吧，都解决了。"
+    "兔娘纳刀，朝你的方向偏头一笑。"
+    player "好帅气……盘子也能这么美丽吗。"
+    hide rs 
+    
+
+    menu choice_tiaoshi:
+        "你为队友精妙的配合感到高兴，想通过手舞足蹈表示这份心情。"
+        "蹦蹦跳跳":
+            jump tiaoshi 
+        "做情感动作":
+            jump tushi
+        "什么都不做":
+            jump wushifasheng
+
+label tiaoshi:
+    "你高兴地原地蹦跳了好几下，欢呼着小小的胜利。队友看向你的眼神却变得诡异起来，纷纷扭头不再与你互动。"
+    "你感到奇怪，后知后觉地发现刚刚所在位置的脚下正是四小的尸体。"
+
+    scene cfmy_d1_2
+    "战斗仍旧进行着，只是失去了魔王护的你血量频频告急。"
+    "躲在后排打药的时候，你似乎远远看到有四个头上带标记的武僧朝你走来。"
+    play sound "audio/skills/lb.mp3"
+    play sound "audio/skills/lb.mp3"
+    play sound "audio/skills/lb.mp3"
+    play sound "audio/skills/lb.mp3"
+    pause 1.5
+    window hide
+
+    scene expression "#000000" with dissolve
+
+    window show
+    "刚刚的四小被你跳尸，气急败坏地切了武僧，你在四个大臭脚的轮番攻击下变成了肉泥。这次没有人保护你。"
+    "【BAD END：招募板见】"
+
+    pause 2.0
+    $ renpy.quit()
+
+label tushi:
+    "你打开情感动作列表，想要做一个振奋人心的动作，却不小心误触了陆行鸟笔。"
+    "情感动作播报没有关闭，所有人左下角都跳出了你的消息。你赶忙想用其他动作盖过去，着急忙慌之下居然又多摁了几遍。"
+    "队友看向你的眼神却变得诡异起来，纷纷扭头不再与你互动。此刻你所在位置的脚下正是四小的尸体。"
+
+    scene cfmy_d1_2
+    "战斗仍旧进行着，只是失去了魔王护的你血量频频告急。躲在后排打药的时候，你似乎远远看到有四个头上带标记的武僧朝你走来。"
+    play sound "audio/skills/lb.mp3"
+    play sound "audio/skills/lb.mp3"
+    play sound "audio/skills/lb.mp3"
+    play sound "audio/skills/lb.mp3"
+    pause 1.5
+    window hide
+
+    scene expression "#000000" with dissolve
+
+    window show
+    "刚刚的四小被你涂尸，气急败坏地切了武僧，你在四个大臭脚的轮番攻击下变成了肉泥。这次没有人保护你。"
+    "【BAD END：这里不是喷喷】"
+
+    pause 2.0
+    $ renpy.quit()
+
+label wushifasheng:
+    player "打战场呢严肃点，别整这些花里胡哨的了，活下来就是最大的报答。"
+    "你收起了整活的念头，继续加入战斗。"
+    jump continue2_2
+
+label continue2_2:
+    scene cfmy_d1_2
+
+    "D1方向还有不少残血的敌人，你终于舍得扔出宝贵的LB，却全给队友垫伤害了，你气急败坏地补了一个火神冲。"
+    play sound "audio/skills/ditian.mp3"
+    show xxw smile at center
+    pause 0.5
+    "蓝紫色的标记此刻出现在了你和队友的身上。"
+    player "有斩钅……"
+    play sound "audio/skills/lb.mp3"
+    pause 0.5
+    "D1窄口提供了天然的聚敌优势，斩铁剑一道直线穿过，地上出现了整整五具尸体。"
+    "其中又没有你……你又被队友捞了。"
+    show yq normal at left
+    show ncg normal at center
+    show cy normal at right 
+    player "谢谢呃，贤者的输血、武僧的轻身步法、骑士的保护，还有我自己的宝宝盾。"
+    "你有一种被所有人当作重点关注对象的感觉。当然你清楚只是因为你是队里最菜的。"
+    hide yq
+    hide ncg
+    hide cy 
+    show xxw sweat at center
+    xxw "……这盾比我命都厚。"
+    hide xxw
+    "你有些惭愧，是自己的莽撞让队友不得不在自己身上浪费资源。你沉默地回到了家门口的D2，不去送就是最大的贡献了。"
+
 
 
 
